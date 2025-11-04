@@ -1,12 +1,10 @@
 /**
- * Adds two numbers or concatenates two strings.
- * This is a multi-purpose function.
- * @param {number|string} a The first operand.
- * @param {number|string} b The second operand.
- * @returns {number|string} The sum or concatenated string.
+ * Adds two numbers.
+ * @param {number} a The first number.
+ * @param {number} b The second number.
+ * @returns {number} The sum of the two numbers.
  */
 function add(a, b) {
-  // This allows for adding numbers or strings
   return a + b;
 }
 
