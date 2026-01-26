@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:flutter_application_2/domain/entities/product.dart';
 import 'package:flutter_application_2/data/repositories/product_repository_impl.dart';
 import 'package:flutter_application_2/data/datasources/product_remote_data_source.dart';
 import 'package:flutter_application_2/data/datasources/product_local_data_source.dart';
 import 'package:flutter_application_2/core/network/network_info.dart';
+import 'package:flutter_application_2/data/models/product_model.dart';
 
 // Create Mock classes
 class MockRemoteDataSource extends Mock implements ProductRemoteDataSource {}
@@ -13,7 +13,7 @@ class MockLocalDataSource extends Mock implements ProductLocalDataSource {}
 
 class MockNetworkInfo extends Mock implements NetworkInfo {}
 
-class FakeProduct extends Fake implements Product {}
+class FakeProduct extends Fake implements ProductModel {}
 
 void main() {
   late ProductRepositoryImpl repository;
@@ -36,7 +36,7 @@ void main() {
     );
   });
 
-  final tProduct = Product(
+  final tProduct = ProductModel(
     id: '1',
     name: 'Test Product',
     description: 'Test Desc',

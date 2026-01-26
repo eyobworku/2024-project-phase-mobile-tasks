@@ -1,9 +1,10 @@
 import '../../domain/entities/product.dart';
+import '../models/product_model.dart';
 
 abstract class ProductRemoteDataSource {
-  Future<List<Product>> getProductsFromApi();
-  Future<void> uploadProduct(Product product);
-  Future<void> updateProduct(Product product);
+  Future<List<ProductModel>> getProductsFromApi();
+  Future<void> uploadProduct(ProductModel product);
+  Future<void> updateProduct(ProductModel product);
   Future<void> deleteProduct(String id);
-  Future<Product> getProductDetail(String id);
+  Future<ProductModel> getProductDetail(String id);
 }
