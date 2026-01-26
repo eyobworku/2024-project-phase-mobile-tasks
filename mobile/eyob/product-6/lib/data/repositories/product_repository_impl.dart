@@ -1,6 +1,7 @@
 import '../../domain/repositories/product_repository.dart';
 import '../datasources/product_remote_data_source.dart';
 import '../datasources/product_local_data_source.dart';
+import '../models/product_model.dart';
 import '../../domain/entities/product.dart';
 
 class ProductRepositoryImpl implements ProductRepository {
@@ -15,7 +16,7 @@ class ProductRepositoryImpl implements ProductRepository {
   });
 
   @override
-  Future<List<Product>> getAllProducts() async {
+  Future<List<ProductModel>> getAllProducts() async {
     if (await networkInfo.isConnected) {
       try {
         final remoteProducts = await remoteDataSource.getProductsFromApi();
@@ -31,7 +32,7 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
-  Future<Product> getProductDetail(String id) async {
+  Future<ProductModel> getProductDetail(String id) async {
     if (await networkInfo.isConnected) {
       return await remoteDataSource.getProductDetail(id);
     } else {
@@ -42,7 +43,14 @@ class ProductRepositoryImpl implements ProductRepository {
   @override
   Future<void> createProduct(Product product) async {
     if (await networkInfo.isConnected) {
-      await remoteDataSource.uploadProduct(product);
+      final productModel = ProductModel(
+        id: product.id,
+        name: product.name,
+        description: product.description,
+        price: product.price,
+        imageUrl: product.imageUrl,
+      );
+      await remoteDataSource.uploadProduct(productModel);
     } else {
       throw Exception('No Internet Connection to create product');
     }
@@ -51,7 +59,14 @@ class ProductRepositoryImpl implements ProductRepository {
   @override
   Future<void> updateProduct(Product product) async {
     if (await networkInfo.isConnected) {
-      await remoteDataSource.updateProduct(product);
+      final productModel = ProductModel(
+        id: product.id,
+        name: product.name,
+        description: product.description,
+        price: product.price,
+        imageUrl: product.imageUrl,
+      );
+      await remoteDataSource.updateProduct(productModel);
     } else {
       throw Exception('No Internet Connection to update product');
     }
